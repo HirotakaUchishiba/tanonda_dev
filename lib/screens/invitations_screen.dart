@@ -34,9 +34,9 @@ class InvitationsScreen extends HookConsumerWidget {
           centerTitle: false,
           automaticallyImplyLeading: false,
           bottom: TabBar(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
             labelStyle: const TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.transparent),
             unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
@@ -72,9 +72,11 @@ class InvitationsScreen extends HookConsumerWidget {
                             itemCount: invitations.length,
                             itemBuilder: (context, index) {
                               final invitation = invitations[index];
-                              return unapprovedInvitationWidget(
-                                  context, invitation.invitationId);
+                              return UnapprovedInvitationWidget(
+                                  invitationId: invitation.invitationId,);
                             },
+                            shrinkWrap: true, // add this line
+                            physics: const NeverScrollableScrollPhysics(),
                           ),
                         ),
                         const SingleChildScrollView(
