@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:ohima/widgets/dialog.dart';
 
 import '../utils/api/google_map_api_client.dart';
 import '../widgets/unapproved_invitation_widget.dart';
+import 'invitation_approved_screen.dart';
 
 class InvitationScreen extends HookConsumerWidget {
   final String invitationId;
@@ -160,7 +163,113 @@ class InvitationScreen extends HookConsumerWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: CommonAlertDialogContent(
+                                      child: SizedBox(
+                                    height: 420,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "キャンセルポリシー",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 28),
+                                        ),
+                                        const Gap(10),
+                                        const Text(
+                                            "招待状承認後のキャンセルには、キャンセルポリシーが適用されます。"),
+                                        const Text(
+                                            "キャンセルを行うタイミングに応じて、キャンセル料金が課されます。"),
+                                        const Gap(20),
+                                        Container(
+                                            height: 150,
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            child: const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "キャンセル規定",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white,
+                                                          fontSize: 20),
+                                                    ),
+                                                    Gap(10),
+                                                    Text(
+                                                      "前日キャンセル: 1000円",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    Text(
+                                                      "当日キャンセル: 2000円",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    Text(
+                                                      "無断キャンセル: 5000円",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )),
+                                        const Gap(20),
+                                        const Text(
+                                            "招待状を承認することで上記のキャンセルポリシーに同意したものとしてみなされます。招待状を承認してもよろしいですか？"),
+                                      ],
+                                    ),
+                                  )),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text("戻る"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text("承認する"),
+                                      onPressed: () async {
+                                        await FirebaseFirestore.instance
+                                            .collection('invitations')
+                                            .doc(
+                                                invitationId) // 更新するドキュメントのIDを指定
+                                            .update(
+                                                {'isApproved': true}) // 更新内容を指定
+                                            .catchError((error) {
+                                          // 更新に失敗した場合のエラーハンドリング
+                                          print(
+                                              "Error updating document: $error");
+                                        });
+
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const InvitationApprovedScreen()),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             foregroundColor: Colors.white,
