@@ -20,7 +20,9 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppUser {
+  String get userEmail => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  String get userProfileImageUrl => throw _privateConstructorUsedError;
   List<String> get fcmTokens => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +35,11 @@ abstract class $AppUserCopyWith<$Res> {
   factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
       _$AppUserCopyWithImpl<$Res, AppUser>;
   @useResult
-  $Res call({String userId, List<String> fcmTokens});
+  $Res call(
+      {String userEmail,
+      String userId,
+      String userProfileImageUrl,
+      List<String> fcmTokens});
 }
 
 /// @nodoc
@@ -49,13 +55,23 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userEmail = null,
     Object? userId = null,
+    Object? userProfileImageUrl = null,
     Object? fcmTokens = null,
   }) {
     return _then(_value.copyWith(
+      userEmail: null == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userProfileImageUrl: null == userProfileImageUrl
+          ? _value.userProfileImageUrl
+          : userProfileImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       fcmTokens: null == fcmTokens
           ? _value.fcmTokens
@@ -72,7 +88,11 @@ abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
       __$$_AppUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, List<String> fcmTokens});
+  $Res call(
+      {String userEmail,
+      String userId,
+      String userProfileImageUrl,
+      List<String> fcmTokens});
 }
 
 /// @nodoc
@@ -85,13 +105,23 @@ class __$$_AppUserCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userEmail = null,
     Object? userId = null,
+    Object? userProfileImageUrl = null,
     Object? fcmTokens = null,
   }) {
     return _then(_$_AppUser(
+      userEmail: null == userEmail
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
+              as String,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userProfileImageUrl: null == userProfileImageUrl
+          ? _value.userProfileImageUrl
+          : userProfileImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       fcmTokens: null == fcmTokens
           ? _value._fcmTokens
@@ -105,7 +135,10 @@ class __$$_AppUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AppUser extends _AppUser {
   const _$_AppUser(
-      {this.userId = '', final List<String> fcmTokens = const <String>[]})
+      {this.userEmail = '',
+      this.userId = '',
+      this.userProfileImageUrl = '',
+      final List<String> fcmTokens = const <String>[]})
       : _fcmTokens = fcmTokens,
         super._();
 
@@ -114,7 +147,13 @@ class _$_AppUser extends _AppUser {
 
   @override
   @JsonKey()
+  final String userEmail;
+  @override
+  @JsonKey()
   final String userId;
+  @override
+  @JsonKey()
+  final String userProfileImageUrl;
   final List<String> _fcmTokens;
   @override
   @JsonKey()
@@ -126,7 +165,7 @@ class _$_AppUser extends _AppUser {
 
   @override
   String toString() {
-    return 'AppUser(userId: $userId, fcmTokens: $fcmTokens)';
+    return 'AppUser(userEmail: $userEmail, userId: $userId, userProfileImageUrl: $userProfileImageUrl, fcmTokens: $fcmTokens)';
   }
 
   @override
@@ -134,15 +173,19 @@ class _$_AppUser extends _AppUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppUser &&
+            (identical(other.userEmail, userEmail) ||
+                other.userEmail == userEmail) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userProfileImageUrl, userProfileImageUrl) ||
+                other.userProfileImageUrl == userProfileImageUrl) &&
             const DeepCollectionEquality()
                 .equals(other._fcmTokens, _fcmTokens));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, const DeepCollectionEquality().hash(_fcmTokens));
+  int get hashCode => Object.hash(runtimeType, userEmail, userId,
+      userProfileImageUrl, const DeepCollectionEquality().hash(_fcmTokens));
 
   @JsonKey(ignore: true)
   @override
@@ -159,14 +202,21 @@ class _$_AppUser extends _AppUser {
 }
 
 abstract class _AppUser extends AppUser {
-  const factory _AppUser({final String userId, final List<String> fcmTokens}) =
-      _$_AppUser;
+  const factory _AppUser(
+      {final String userEmail,
+      final String userId,
+      final String userProfileImageUrl,
+      final List<String> fcmTokens}) = _$_AppUser;
   const _AppUser._() : super._();
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$_AppUser.fromJson;
 
   @override
+  String get userEmail;
+  @override
   String get userId;
+  @override
+  String get userProfileImageUrl;
   @override
   List<String> get fcmTokens;
   @override

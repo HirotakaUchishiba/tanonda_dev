@@ -29,7 +29,6 @@ class AppUserRepository {
     await appUserRef(userId: userId).set(
       AppUser(
         userId: userId,
-        // 本当は FieldValue.arrayUnion を使うべきだが、いったんこれで。
         fcmTokens: fcmToken == null ? [] : <String>[fcmToken],
       ),
       SetOptions(merge: true),

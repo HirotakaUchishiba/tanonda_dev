@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ohima/features/auth/auth.dart';
 import 'package:ohima/widgets/gradient_circular_progress_indicator.dart';
 
 class ProfileScreen extends HookConsumerWidget {
@@ -20,7 +21,7 @@ class ProfileScreen extends HookConsumerWidget {
             title: const Text('プロフィール',
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.black)),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             elevation: 0.0,
             centerTitle: false,
             automaticallyImplyLeading: false),
@@ -40,7 +41,8 @@ class ProfileScreen extends HookConsumerWidget {
                         const CircleAvatar(
                           radius: 50,
                           backgroundImage:
-                              AssetImage('images/default_profile.jpg'),
+                              AssetImage('images/default_profile.png'),
+                              backgroundColor: Colors.white,
                         ),
                         GradientCircularProgressIndicator(0.8),
                       ],
@@ -141,7 +143,7 @@ class ProfileScreen extends HookConsumerWidget {
                   ],
                 ),
                 const Gap(50),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,6 +205,23 @@ class ProfileScreen extends HookConsumerWidget {
                             Gap(10),
                             Text('お気に入りのお店', style: TextStyle(fontSize: 14)),
                           ],
+                        ),
+                      ),
+                      Divider(),
+                      GestureDetector(
+                        onTap: () {
+                          ref.read(signOutProvider)();
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.logout_rounded,color: Colors.red,),
+                              Gap(10),
+                              Text('ログアウト', style: TextStyle(fontSize: 14,color: Colors.red)),
+                            ],
+                          ),
                         ),
                       ),
                     ],

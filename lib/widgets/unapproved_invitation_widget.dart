@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../models/invitation.dart';
+import '../screens/invitation_screen.dart';
 
 // データベースから特定のInvitationをストリームとして取得
 final invitationStreamProvider =
@@ -30,8 +31,10 @@ class UnapprovedInvitationWidget extends HookConsumerWidget {
 
     return invitationAsyncValue.when(
       data: (invitation) {
-        final date = invitation.invitationSchedule.dateTime; 
-final formattedDate = (date != null) ? DateFormat('yyyy年M月d日').format(date) : "Date not available";
+        final date = invitation.invitationSchedule.dateTime;
+        final formattedDate = (date != null)
+            ? DateFormat('yyyy年M月d日').format(date)
+            : "Date not available";
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +58,7 @@ final formattedDate = (date != null) ? DateFormat('yyyy年M月d日').format(date
                       width: MediaQuery.of(context).size.width *
                           0.875, // 87.5% of device width
                       child: Column(
-                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
@@ -73,8 +76,7 @@ final formattedDate = (date != null) ? DateFormat('yyyy年M月d日').format(date
                                               BorderRadius.circular(10),
                                           color: Colors.white),
                                       child: Center(
-                                        child: Text(
-                                            formattedDate,
+                                        child: Text(formattedDate,
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
@@ -85,12 +87,12 @@ final formattedDate = (date != null) ? DateFormat('yyyy年M月d日').format(date
                                 ),
                                 const Gap(20),
                                 Column(
-                                 
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(invitation.storeName,
                                         //Textがoverflowすると2行になる
                                         overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -117,8 +119,17 @@ final formattedDate = (date != null) ? DateFormat('yyyy年M月d日').format(date
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white),
                                           ),
-                                          onPressed: () =>
-                                              print(invitation.storeImageUrl),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    InvitationScreen(
+                                                        invitationId:
+                                                            invitationId),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                       const Gap(10),

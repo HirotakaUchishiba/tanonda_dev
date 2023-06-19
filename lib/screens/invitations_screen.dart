@@ -36,12 +36,14 @@ class InvitationsScreen extends HookConsumerWidget {
           bottom: TabBar(
             padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
             labelStyle: const TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.transparent),
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.transparent),
             unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: Colors.pinkAccent),
+                color: Colors.black),
             tabs: const [
               Tab(text: '未承認'),
               Tab(text: '承認済'),
@@ -73,9 +75,10 @@ class InvitationsScreen extends HookConsumerWidget {
                             itemBuilder: (context, index) {
                               final invitation = invitations[index];
                               return UnapprovedInvitationWidget(
-                                  invitationId: invitation.invitationId,);
+                                invitationId: invitation.invitationId,
+                              );
                             },
-                            shrinkWrap: true, // add this line
+                            shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                           ),
                         ),

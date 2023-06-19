@@ -1,11 +1,16 @@
-import 'package:ohima/features/user_email_provider.dart';
-import 'package:ohima/features/user_id_provider.dart';
-import 'package:ohima/features/user_password_provider.dart';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
+import 'package:ohima/features/user_email_provider.dart';
+import 'package:ohima/features/user_id_provider.dart';
+import 'package:ohima/features/user_password_provider.dart';
 import 'package:ohima/screens/register_name_screen.dart';
 
 class SignupScreen extends HookConsumerWidget {
@@ -16,6 +21,40 @@ class SignupScreen extends HookConsumerWidget {
     final formKey = GlobalKey<FormState>();
     String email = '';
     String password = '';
+    //Image_pickerがシミュレータに対応していないため、コメントアウト
+    // XFile? profileImageFile;
+
+    // final ImagePicker picker = ImagePicker();
+
+    // Future getImage() async {
+    //   final XFile? selectedImage =
+    //       await picker.pickImage(source: ImageSource.gallery);
+
+    //   if (selectedImage != null) {
+    //     profileImageFile = selectedImage;
+    //   }
+    // }
+
+    // Future uploadImageToFirebase(BuildContext context, String userId) async {
+    //   String fileName = Path.basename(profileImageFile!.path);
+    //   FirebaseStorage storage = FirebaseStorage.instance;
+    //   Reference ref = storage.ref().child("upload/image/$fileName");
+    //   UploadTask uploadTask = ref.putFile(File(profileImageFile!.path));
+
+    //   await uploadTask.whenComplete(() async {
+    //     final String downloadURL = await ref.getDownloadURL();
+        
+    //     // Firestoreにユーザー情報と画像のURLを保存
+    //     await FirebaseFirestore.instance
+    //         .collection('users')
+    //         .doc(userId)
+    //         .update({
+    //       'image_url': downloadURL,  // ここで画像のURLを保存
+    //     });
+    //   }).catchError((onError) {
+    //     print(onError);
+    //   });
+    // }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -82,7 +121,15 @@ class SignupScreen extends HookConsumerWidget {
                           ? 'パスワードを入力してください'
                           : null,
                     ),
-                    const SizedBox(height: 16),
+                    // Image_pickerがシミュレータに対応していないため、コメントアウト
+                    // const SizedBox(height: 20),
+                    // ElevatedButton(
+                    //   onPressed: getImage,
+                    //   child: const Text('Choose Profile Image'),
+                    // ),
+                    // profileImageFile == null
+                    //     ? Container()
+                    //     : Image.file(File(profileImageFile!.path)),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -124,9 +171,16 @@ class SignupScreen extends HookConsumerWidget {
                                   password;
 
                               // プロバイダーにユーザーIDをセット
-                              final uid = ref.read(userIdProvider.notifier).state =
-                                  userCredential.user!.uid;
-                              print("セットされたuid:" + uid);
+                              final uid = ref
+                                  .read(userIdProvider.notifier)
+                                  .state = userCredential.user!.uid;
+                              print("セットされたuid:$uid");
+                              
+                              // Image_pickerがシミュレータに対応していないため、コメントアウト
+                              // if(profileImageFile != null){
+                              //   await uploadImageToFirebase(context, uid);
+                              // }
+
                               // 次の画面へ遷移
                               Navigator.push(
                                 context,
