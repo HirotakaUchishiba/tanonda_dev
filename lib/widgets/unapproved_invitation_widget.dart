@@ -6,9 +6,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../models/invitation.dart';
-import '../screens/invitation_screen.dart';
+import '../screens/unapproved_invitation_screen.dart';
 
-// データベースから特定のInvitationをストリームとして取得
+final unapprovedInvitationStreamProvider =
+    StreamProvider.autoDispose<List<Invitation>>((ref) {
+  return FirebaseFirestore.instance
+      .collection('invitations')
+      .where('isApproved', isEqualTo: false)
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => Invitation.fromDocumentSnapshot(doc))
+          .toList());
+});
+
 final invitationStreamProvider =
     StreamProvider.autoDispose.family<Invitation, String>((ref, invitationId) {
   return FirebaseFirestore.instance
@@ -21,8 +31,10 @@ final invitationStreamProvider =
 class UnapprovedInvitationWidget extends HookConsumerWidget {
   final String invitationId;
 
-  const UnapprovedInvitationWidget({Key? key, required this.invitationId})
-      : super(key: key);
+  const UnapprovedInvitationWidget({
+    Key? key,
+    required this.invitationId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,6 +47,7 @@ class UnapprovedInvitationWidget extends HookConsumerWidget {
         final formattedDate = (date != null)
             ? DateFormat('yyyy年M月d日').format(date)
             : "Date not available";
+
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +105,6 @@ class UnapprovedInvitationWidget extends HookConsumerWidget {
                                     Text(invitation.storeName,
                                         //Textがoverflowすると2行になる
                                         overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -102,7 +114,7 @@ class UnapprovedInvitationWidget extends HookConsumerWidget {
                                 const Gap(20),
                                 Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.start,
                                     children: [
                                       Container(
                                         width: 150,
@@ -124,33 +136,15 @@ class UnapprovedInvitationWidget extends HookConsumerWidget {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    InvitationScreen(
-                                                        invitationId:
-                                                            invitationId),
+                                                    UnApprovedInvitationScreen(
+                                                        invitationId: invitation
+                                                            .invitationId),
                                               ),
                                             );
                                           },
                                         ),
                                       ),
-                                      const Gap(10),
-                                      Container(
-                                        width: 150,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white54,
-                                        ),
-                                        child: TextButton(
-                                          child: const Text(
-                                            '辞退する',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          ),
-                                          onPressed: () {},
-                                        ),
-                                      ),
+                                     
                                     ]),
                               ],
                             ),

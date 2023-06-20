@@ -3,8 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../models/invitation.dart';
+import '../screens/approved_invitation_screen.dart';
+import '../screens/certification_screen.dart';
 
 // データベースから特定のInvitationをストリームとして取得
 final invitationStreamProvider =
@@ -16,19 +19,38 @@ final invitationStreamProvider =
       .map((snapshot) => Invitation.fromDocumentSnapshot(snapshot));
 });
 
+final approvedInvitationStreamProvider =
+    StreamProvider.autoDispose<List<Invitation>>((ref) {
+  return FirebaseFirestore.instance
+      .collection('invitations')
+      .where('isApproved', isEqualTo: true)
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => Invitation.fromDocumentSnapshot(doc))
+          .toList());
+});
+
 class ApprovedInvitationWidget extends HookConsumerWidget {
   final String invitationId;
 
-  const ApprovedInvitationWidget({Key? key, required this.invitationId})
-      : super(key: key);
+  const ApprovedInvitationWidget({
+    Key? key,
+    required this.invitationId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Use the `invitationId` to get the specific `Invitation`
     final invitationAsyncValue =
         ref.watch(invitationStreamProvider(invitationId));
 
     return invitationAsyncValue.when(
       data: (invitation) {
+        final date = invitation.invitationSchedule.dateTime;
+        final formattedDate = (date != null)
+            ? DateFormat('yyyy年M月d日').format(date)
+            : "Date not available";
+
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -47,11 +69,10 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                             ),
                             fit: BoxFit.cover),
                       ),
-                      height: MediaQuery.of(context).size.width *
-                          0.5, // 75% of device width
-                      width: MediaQuery.of(context).size.width *
-                          0.875, // 87.5% of device width
+                      height: MediaQuery.of(context).size.width * 0.5,
+                      width: MediaQuery.of(context).size.width * 0.875,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
@@ -63,30 +84,14 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                                   children: [
                                     Container(
                                       height: 25,
-                                      width: 100,
+                                      width: 150,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           color: Colors.white),
-                                      child: const Center(
-                                        child: Text("2023/6/29",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                                fontSize: 16)),
-                                      ),
-                                    ),
-                                    const Gap(5),
-                                    Container(
-                                      height: 25,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white),
-                                      child: const Center(
-                                        child: Text("20 ast",
-                                            style: TextStyle(
+                                      child: Center(
+                                        child: Text(formattedDate,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
                                                 fontSize: 16)),
@@ -95,20 +100,13 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                                   ],
                                 ),
                                 const Gap(20),
-                                const Column(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("C.S.B Hookah Cafe&Bar",
+                                    Text(invitation.storeName,
                                         //Textがoverflowすると2行になる
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 26)),
-                                    Text("Osaka Umeda",
-                                        //Textがoverflowすると2行になる
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 26)),
@@ -134,8 +132,17 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white),
                                           ),
-                                          onPressed: () =>
-                                              print(invitation.storeImageUrl),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ApprovedInvitationScreen(
+                                                        invitationId: invitation
+                                                            .invitationId),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                       const Gap(10),
@@ -149,12 +156,20 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                                         ),
                                         child: TextButton(
                                           child: const Text(
-                                            '辞退する',
+                                            '参加証を表示',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const CertificationScreen(),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
                                     ]),

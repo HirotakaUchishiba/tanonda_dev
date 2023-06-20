@@ -49,7 +49,7 @@ class AppRouter {
         if (!isSignedIn) {
           return MaterialPageRoute(
             builder: (context) =>
-                HomeScreen(), // Assuming you have a `HomePage` widget
+                HomeScreen(),
           );
         }
       }
@@ -80,9 +80,6 @@ class AppRouter {
     }
   }
 
-  /// パス、パスパラメータ、クエリパラメータの解析を行い、
-  /// 対応する AppRoute と extra も含めて AppRouterState を返す。
-  /// その 2 つのインスタンスをまとめて返したいだけで、Tuple であることに深い理由はない。
   Tuple2<AppRoute, AppRouterState> _analyzeRoute(
     RouteSettings routeSettings, {
     String? bottomNavigationPath,

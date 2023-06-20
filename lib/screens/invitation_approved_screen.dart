@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:ohima/screens/invitations_screen.dart';
+import 'package:ohima/screens/root_navigator.dart';
 
 class InvitationApprovedScreen extends StatelessWidget {
   const InvitationApprovedScreen({super.key});
@@ -43,7 +44,7 @@ class InvitationApprovedScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const InvitationsScreen()),
+                                    const RootNavigator()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

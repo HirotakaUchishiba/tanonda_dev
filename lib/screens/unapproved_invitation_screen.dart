@@ -8,13 +8,14 @@ import 'package:intl/intl.dart';
 import 'package:ohima/widgets/dialog.dart';
 
 import '../utils/api/google_map_api_client.dart';
+
 import '../widgets/unapproved_invitation_widget.dart';
 import 'invitation_approved_screen.dart';
 
-class InvitationScreen extends HookConsumerWidget {
+class UnApprovedInvitationScreen extends HookConsumerWidget {
   final String invitationId;
 
-  const InvitationScreen({Key? key, required this.invitationId})
+  const UnApprovedInvitationScreen({Key? key, required this.invitationId})
       : super(key: key);
 
   @override
