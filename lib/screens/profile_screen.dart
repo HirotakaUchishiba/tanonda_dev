@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ohima/features/auth/auth.dart';
 import 'package:ohima/widgets/gradient_circular_progress_indicator.dart';
 
+import '../widgets/wallet_button.dart';
+
 class ProfileScreen extends HookConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
   static const path = '/profile';
@@ -42,7 +44,7 @@ class ProfileScreen extends HookConsumerWidget {
                           radius: 50,
                           backgroundImage:
                               AssetImage('images/default_profile.png'),
-                              backgroundColor: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
                         GradientCircularProgressIndicator(0.8),
                       ],
@@ -86,55 +88,36 @@ class ProfileScreen extends HookConsumerWidget {
                               colors: [Colors.indigo, Colors.pink]),
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.white),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(10.0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               backgroundColor: Colors.white,
                               radius: 50,
                               backgroundImage:
                                   AssetImage('images/aster_logo.png'),
                             ),
-                            const Gap(20),
+                            Gap(20),
                             Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     '獲得ASTER',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
                                   ),
-                                  const Text(
+                                  Text(
                                     '2000AST',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontSize: 30),
                                   ),
-                                  const Gap(5),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      foregroundColor: Colors.black,
-                                      backgroundColor: Colors.white,
-                                      textStyle: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                    ),
-                                    child: const Text('Walletを見る',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ),
+                                  Gap(5),
+                                  WalletButton(),
                                 ])
                           ],
                         ),
@@ -144,11 +127,11 @@ class ProfileScreen extends HookConsumerWidget {
                 ),
                 const Gap(50),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
@@ -158,9 +141,9 @@ class ProfileScreen extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                      Gap(10),
-                      Divider(),
-                      Padding(
+                      const Gap(10),
+                      const Divider(),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -171,8 +154,8 @@ class ProfileScreen extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      Divider(),
-                      Padding(
+                      const Divider(),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -183,8 +166,8 @@ class ProfileScreen extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      Divider(),
-                      Padding(
+                      const Divider(),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -195,8 +178,8 @@ class ProfileScreen extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      Divider(),
-                      Padding(
+                      const Divider(),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -207,19 +190,24 @@ class ProfileScreen extends HookConsumerWidget {
                           ],
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       GestureDetector(
                         onTap: () {
                           ref.read(signOutProvider)();
                         },
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(Icons.logout_rounded,color: Colors.red,),
+                              Icon(
+                                Icons.logout_rounded,
+                                color: Colors.red,
+                              ),
                               Gap(10),
-                              Text('ログアウト', style: TextStyle(fontSize: 14,color: Colors.red)),
+                              Text('ログアウト',
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.red)),
                             ],
                           ),
                         ),
