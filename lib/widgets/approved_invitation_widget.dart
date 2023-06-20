@@ -9,7 +9,7 @@ import '../models/invitation.dart';
 import '../screens/approved_invitation_screen.dart';
 import '../screens/certification_screen.dart';
 
-// データベースから特定のInvitationをストリームとして取得
+
 final invitationStreamProvider =
     StreamProvider.autoDispose.family<Invitation, String>((ref, invitationId) {
   return FirebaseFirestore.instance
@@ -40,7 +40,7 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Use the `invitationId` to get the specific `Invitation`
+
     final invitationAsyncValue =
         ref.watch(invitationStreamProvider(invitationId));
 

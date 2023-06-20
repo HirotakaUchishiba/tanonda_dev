@@ -21,7 +21,6 @@ final isSignedInProvider = Provider(
   (ref) => ref.watch(userIdProvider).whenData((userId) => userId != null),
 );
 
-/// FirebaseAuth の匿名ログインを行って、そのユーザー ID でユーザードキュメントを作成する。
 final signInAnonymouslyProvider = Provider.autoDispose<Future<void> Function()>(
   (ref) => () async {
     try {
@@ -31,7 +30,9 @@ final signInAnonymouslyProvider = Provider.autoDispose<Future<void> Function()>(
         throw const AppException(message: '匿名サインインに失敗しました。');
       }
       final fcmToken = await ref.read(getFcmTokenProvider)();
-      await ref.read(appUserRepositoryProvider).setUser(userId: user.uid, fcmToken: fcmToken);
+      await ref
+          .read(appUserRepositoryProvider)
+          .setUser(userId: user.uid, fcmToken: fcmToken);
     } on FirebaseException catch (e) {
       logger.warning(e.toString());
     } on AppException catch (e) {
@@ -40,7 +41,6 @@ final signInAnonymouslyProvider = Provider.autoDispose<Future<void> Function()>(
   },
 );
 
-/// FirebaseAuth からログアウトする。
 final signOutProvider = Provider.autoDispose<Future<void> Function()>(
   (ref) => () async {
     try {

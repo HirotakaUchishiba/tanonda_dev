@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import '../../utils/extensions/build_context.dart';
 import '../utils/constants/number.dart';
 
-/// AlertDialog.content に指定する
-/// SizedBox で横幅を良い感じに調整したウィジェット。
+
 class CommonAlertDialogContent extends StatelessWidget {
   const CommonAlertDialogContent({
     super.key,

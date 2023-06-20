@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-/// Shimmer の楕円形や長方形の要素ウィジェット
 class ShimmerWidget extends StatelessWidget {
   /// 楕円形
   const ShimmerWidget.circular({
@@ -15,7 +14,6 @@ class ShimmerWidget extends StatelessWidget {
         borderRadius = null,
         shape = BoxShape.circle;
 
-  /// 長方形
   const ShimmerWidget.rectangular({
     super.key,
     required this.width,
@@ -46,17 +44,15 @@ class ShimmerWidget extends StatelessWidget {
           width: width,
           decoration: BoxDecoration(
             color: baseColor,
-            borderRadius: borderRadius == null ? null : BorderRadius.circular(borderRadius!),
+            borderRadius: borderRadius == null
+                ? null
+                : BorderRadius.circular(borderRadius!),
             shape: shape,
           ),
         ),
       );
 }
 
-/// Shimmer の楕円形や長方形の要素ウィジェット。
-/// ListView などの子要素として並べるために Alignment ウィジェットでラップしている。
-/// Remi さんの stack overflow での回答：
-/// https://stackoverflow.com/a/49821077/14440542
 class AlignedShimmerWidget extends StatelessWidget {
   /// 楕円形
   const AlignedShimmerWidget.circular({
@@ -71,7 +67,6 @@ class AlignedShimmerWidget extends StatelessWidget {
         borderRadius = null,
         shape = BoxShape.circle;
 
-  /// 長方形
   const AlignedShimmerWidget.rectangular({
     super.key,
     required this.width,
@@ -106,7 +101,9 @@ class AlignedShimmerWidget extends StatelessWidget {
             width: width,
             decoration: BoxDecoration(
               color: baseColor,
-              borderRadius: borderRadius == null ? null : BorderRadius.circular(borderRadius!),
+              borderRadius: borderRadius == null
+                  ? null
+                  : BorderRadius.circular(borderRadius!),
               shape: shape,
             ),
           ),

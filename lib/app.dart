@@ -97,7 +97,7 @@ class App extends ConsumerWidget {
       home: !isSignedIn ? HomeScreen() : const RootNavigator(),
       builder: (context, child) {
         return MediaQuery(
-          // 端末依存のフォントスケールを 1 に固定
+
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
           child: child!,
         );

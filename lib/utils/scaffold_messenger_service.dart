@@ -12,7 +12,6 @@ final scaffoldMessengerKeyProvider =
 final scaffoldMessengerServiceProvider =
     Provider.autoDispose(ScaffoldMessengerService.new);
 
-/// ツリー上部の ScaffoldMessenger 上でスナックバーやダイアログの表示を操作する。
 class ScaffoldMessengerService {
   ScaffoldMessengerService(this._ref);
 
@@ -21,7 +20,6 @@ class ScaffoldMessengerService {
   GlobalKey<ScaffoldMessengerState> get scaffoldMessengerKey =>
       _ref.read(scaffoldMessengerKeyProvider);
 
-  /// showDialog で指定したビルダー関数を返す。
   Future<T?> showDialogByBuilder<T>({
     required Widget Function(BuildContext) builder,
     bool barrierDismissible = true,
@@ -33,7 +31,6 @@ class ScaffoldMessengerService {
     );
   }
 
-  /// showModalBottomSheet で指定したビルダー関数を返す。
   Future<T?> showModalBottomSheetByBuilder<T>({
     required Widget Function(BuildContext) builder,
   }) async {
@@ -49,7 +46,6 @@ class ScaffoldMessengerService {
     );
   }
 
-  /// スナックバーを表示する。
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
     String message, {
     bool removeCurrentSnackBar = true,
@@ -68,9 +64,6 @@ class ScaffoldMessengerService {
     );
   }
 
-  /// Exception 起点でスナックバーを表示する。
-  /// Dart の Exception 型の場合は toString() 冒頭を取り除いて
-  /// 差し支えのないメッセージに置換しておく。
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
       showSnackBarByException(Exception e) {
     final message =
@@ -78,7 +71,6 @@ class ScaffoldMessengerService {
     return showSnackBar(message.ifIsEmpty(generalExceptionMessage));
   }
 
-  /// FirebaseException 起点でスナックバーを表示する
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
       showSnackBarByFirebaseException(
     FirebaseException e,

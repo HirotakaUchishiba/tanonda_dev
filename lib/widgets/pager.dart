@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../utils/styles/button.dart';
 
-/// 前 or 次のページへボタンの列挙 (previous or next)
 enum PagerButtonType {
   previous(label: '前のページへ', iconData: FontAwesomeIcons.chevronLeft),
   next(label: '次のページへ', iconData: FontAwesomeIcons.chevronRight);
@@ -19,7 +18,6 @@ enum PagerButtonType {
   final IconData iconData;
 }
 
-/// 前 or 次のページへボタン
 class PagerButton extends HookConsumerWidget {
   const PagerButton.previous({
     super.key,
@@ -40,13 +38,13 @@ class PagerButton extends HookConsumerWidget {
       onPressed: onPressed,
       style: AppButtonStyle.white,
       child: Row(
-        children:
-            buttonType == PagerButtonType.previous ? _children : List.from(_children.reversed),
+        children: buttonType == PagerButtonType.previous
+            ? _children
+            : List.from(_children.reversed),
       ),
     );
   }
 
-  /// 左から、アイコン → 文字 の順序を正の順番とする
   List<Widget> get _children => <Widget>[
         FaIcon(buttonType.iconData, size: 14, color: Colors.black26),
         const Gap(8),
@@ -54,7 +52,6 @@ class PagerButton extends HookConsumerWidget {
       ];
 }
 
-/// 前, 次のページへボタンを spaceEvenly で横に並べたページャウィジェット
 class PagerWidget extends HookConsumerWidget {
   const PagerWidget({
     super.key,
@@ -78,7 +75,8 @@ class PagerWidget extends HookConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        if (hasPrevious) PagerButton.previous(onPressed: onPreviousButtonTapped),
+        if (hasPrevious)
+          PagerButton.previous(onPressed: onPreviousButtonTapped),
         if (hasNext) PagerButton.next(onPressed: onNextButtonTapped),
       ],
     );

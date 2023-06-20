@@ -1,12 +1,4 @@
 extension MapExtension on Map<String, dynamic>? {
-  /// Map<String, dynamic>? から特定の Key の Value を取得する
-  ///
-  /// - this のインスタンスが null の場合は null
-  /// - [ignoreError] が true の場合 null
-  /// - [ignoreError] が false の場合 Exception
-  /// - キャストできない場合は null
-  ///
-  /// が返される。
   T? getByKey<T extends Object?>(String key, {bool ignoreError = true}) {
     if (this == null) {
       return null;

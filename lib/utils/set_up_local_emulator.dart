@@ -7,7 +7,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'logger.dart';
 
-/// Firebase Emulator Suite に接続するための設定を行う。
 Future<void> setUpLocalEmulator({
   String localhost = 'localhost',
   int firestorePortNumber = 8080,
@@ -21,11 +20,14 @@ Future<void> setUpLocalEmulator({
 }) async {
   logger.info('Running with Firebase Local Emulator Suite');
   FirebaseFirestore.instance.settings = Settings(
-    host: Platform.isAndroid ? '10.0.2.2:$firestorePortNumber' : '$localhost:$firestorePortNumber',
+    host: Platform.isAndroid
+        ? '10.0.2.2:$firestorePortNumber'
+        : '$localhost:$firestorePortNumber',
     sslEnabled: firestoreSSLEnabled,
     persistenceEnabled: firestorePersistenceEnabled,
   );
-  FirebaseFirestore.instance.useFirestoreEmulator(localhost, firestorePortNumber);
+  FirebaseFirestore.instance
+      .useFirestoreEmulator(localhost, firestorePortNumber);
   FirebaseFunctions.instanceFor(region: region)
       .useFunctionsEmulator(localhost, functionsPortNumber);
   FirebaseStorage.instanceFor(bucket: bucket);

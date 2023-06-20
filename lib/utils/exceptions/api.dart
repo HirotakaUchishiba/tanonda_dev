@@ -1,7 +1,6 @@
 import '../constants/string.dart';
 import 'base.dart';
 
-/// HTTP 通信時に使用する例外型。
 class ApiException extends AppException implements Exception {
   const ApiException({
     super.code,
@@ -10,7 +9,6 @@ class ApiException extends AppException implements Exception {
   });
 }
 
-/// HTTP リクエストで 401 が発生した場合の例外
 class UnauthorizedException extends ApiException {
   const UnauthorizedException({super.message})
       : super(
@@ -19,7 +17,6 @@ class UnauthorizedException extends ApiException {
         );
 }
 
-/// HTTP リクエストで 403 が発生した場合の例外
 class ForbiddenException extends ApiException {
   const ForbiddenException({super.message})
       : super(
@@ -28,7 +25,6 @@ class ForbiddenException extends ApiException {
         );
 }
 
-/// HTTP リクエストで 404 が発生した場合の例外
 class ApiNotFoundException extends ApiException {
   const ApiNotFoundException({super.message})
       : super(
@@ -37,7 +33,6 @@ class ApiNotFoundException extends ApiException {
         );
 }
 
-/// HTTP リクエストがタイムアウトした場合の例外
 class ApiTimeoutException extends ApiException {
   const ApiTimeoutException({super.message})
       : super(
@@ -46,7 +41,6 @@ class ApiTimeoutException extends ApiException {
         );
 }
 
-/// HTTP リクエスト時のネットワーク接続に問題がある場合の例外
 class NetworkNotConnectedException extends ApiException {
   const NetworkNotConnectedException({super.message})
       : super(

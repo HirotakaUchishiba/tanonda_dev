@@ -5,51 +5,38 @@ import 'package:ohima/screens/home_screen.dart';
 import 'package:ohima/screens/not_found_screen.dart';
 import 'package:path_to_regexp/path_to_regexp.dart';
 import 'package:tuple/tuple.dart';
+
 import '../exceptions/common.dart';
-import '../extensions/dynamic.dart';
 import 'app_route.dart';
 import 'app_router_state.dart';
 import 'app_routes.dart';
 
-final appRouterProvider = Provider<AppRouter>((ref) => AppRouter(appRoutes, ref));
+final appRouterProvider =
+    Provider<AppRouter>((ref) => AppRouter(appRoutes, ref));
 
 class AppRouter {
-  AppRouter(this.appRoutes,this._ref);
+  AppRouter(this.appRoutes, this._ref);
   final List<AppRoute> appRoutes;
   final Ref _ref;
   final initialRoute = '/';
 
   bool requireAuthentication(String path) {
-    // Add the paths that require authentication in this list.
     List<String> authRequiredRoutes = ['/profile', '/settings'];
 
     return authRequiredRoutes.contains(path);
   }
 
-  /// MaterialApp や Navigator の onGenerateRoute に指定して、
-  ///
-  /// - 遷移するべき画面の決定、パスパラメータの解析
-  /// - AppRoute.state の設定
-  /// - トランジションアニメーションの決定
-  ///
-  /// を行うメソッド。
-  /// GoRouter を参考にして、それよりも簡易で、複数 Navigator を用いて
-  /// BottomNavigationBar を維持した画面遷移が行えるようにする目的。
-  /// GoRouter がそれに対応したらこの AppRouter クラスの使用はやめて移行することも検討する。
   Route<dynamic> onGenerateRoute(
     RouteSettings routeSettings, {
     String? bottomNavigationPath,
   }) {
     try {
-      // Check if the route requires authentication.
       if (requireAuthentication(routeSettings.name ?? '')) {
-        // Get the current authentication status.
         final isSignedIn = _ref.read(isSignedInProvider).value ?? false;
-        // If the user is not authenticated, redirect to '/home'.
+
         if (!isSignedIn) {
           return MaterialPageRoute(
-            builder: (context) =>
-                HomeScreen(),
+            builder: (context) => HomeScreen(),
           );
         }
       }
@@ -114,7 +101,6 @@ class AppRouter {
     return Tuple2(appRoute, appRouteState);
   }
 
-  /// onGenerateRoute と同じ引数を受けてパスを決定する。
   String _location(
     RouteSettings routeSettings, {
     String? bottomNavigationPath,

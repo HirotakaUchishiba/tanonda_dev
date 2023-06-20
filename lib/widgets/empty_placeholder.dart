@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 
 import '../utils/extensions/build_context.dart';
 
-/// 表示内容が特にない場合に、中央に代わりのウィジェットやメッセージを表示するウィジェット。
 class EmptyPlaceholderWidget extends StatelessWidget {
   const EmptyPlaceholderWidget({
     super.key,

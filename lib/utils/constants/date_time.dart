@@ -1,4 +1,3 @@
-/// 月の列挙。
 enum Month {
   jan(value: 1, label: '1月'),
   feb(value: 2, label: '2月'),
@@ -18,12 +17,9 @@ enum Month {
     required this.label,
   });
 
-  /// 月の値
   final int value;
 
-  /// 表示する内容
   final String label;
 
-  /// 指定した整数値が月として有効かどうか
   static bool isValidMonth(int month) => values.map((e) => e.value).toList().contains(month);
 }

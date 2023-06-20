@@ -7,13 +7,12 @@ import 'package:path_provider/path_provider.dart';
 import 'app.dart';
 import 'utils/application_documents_directory.dart';
 import 'utils/firebase_messaging.dart';
-import 'utils/set_up_local_emulator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // 画面の向きを固定する。
+
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  // Firebase を初期化する。
+
   await Firebase.initializeApp();
 
   runApp(

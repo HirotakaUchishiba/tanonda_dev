@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ohima/screens/root_navigator.dart';
 import 'package:path/path.dart' as Path;
 import 'package:ohima/features/user_email_provider.dart';
 import 'package:ohima/features/user_id_provider.dart';
 import 'package:ohima/features/user_password_provider.dart';
-import 'package:ohima/screens/register_name_screen.dart';
 
 class SignupScreen extends HookConsumerWidget {
   const SignupScreen({super.key});
@@ -186,7 +186,7 @@ class SignupScreen extends HookConsumerWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const RegisterNameScreen()),
+                                        const RootNavigator()),
                               );
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'パスワードが短すぎます。') {

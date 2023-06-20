@@ -4,8 +4,6 @@ import '../constants/map.dart';
 
 const baseResponseDataConverter = BaseResponseDataConverter();
 
-/// dynamic な ResponseData を Map<String, dynamic> に変換する
-/// コンバータ。
 class BaseResponseDataConverter
     implements JsonConverter<Map<String, dynamic>, dynamic> {
   const BaseResponseDataConverter();
@@ -16,8 +14,6 @@ class BaseResponseDataConverter
       return emptyMap;
     }
     if (data is List) {
-      // データがリストである場合は
-      // 'items' のキーをつけて Map<String, List<dynamic>> にする。
       return <String, List<dynamic>>{'items': data};
     }
     return data as Map<String, dynamic>;

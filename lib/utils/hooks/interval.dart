@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-/// flutter_use の useInterval を参考に実装したインターバルの hook メソッド。
 void useInterval(
   VoidCallback callback, [
   Duration? delay = const Duration(milliseconds: 100),

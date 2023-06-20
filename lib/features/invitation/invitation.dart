@@ -4,7 +4,6 @@ import '../../models/invitation.dart';
 import '../../repositories/firestore/invitation_repository.dart';
 import '../auth/auth.dart';
 
-/// Invitation 一覧を購読する StreamProvider。
 final invitationsStreamProvider = StreamProvider.autoDispose((ref) {
   final userId = ref.watch(userIdProvider).value;
   if (userId == null) {
@@ -15,7 +14,8 @@ final invitationsStreamProvider = StreamProvider.autoDispose((ref) {
 
 final invitationStreamProvider =
     StreamProvider.family.autoDispose<Invitation?, String>((ref, invitationId) {
-  final result =
-      ref.read(invitationsRepositoryProvider).subscribeInvitation(invitationId: invitationId);
+  final result = ref
+      .read(invitationsRepositoryProvider)
+      .subscribeInvitation(invitationId: invitationId);
   return result;
 });

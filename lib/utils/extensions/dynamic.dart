@@ -1,5 +1,4 @@
 extension DynamicExtension on dynamic {
-  /// dynamic から bool への変換を行う。
   bool get toBool {
     if (this == null) {
       return false;
