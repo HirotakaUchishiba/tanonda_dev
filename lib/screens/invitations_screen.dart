@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/features/invitation/invitation.dart';
 import 'package:ohima/utils/loading.dart';
 import 'package:ohima/widgets/approved_invitation_widget.dart';
 import 'package:ohima/widgets/empty_placeholder.dart';
@@ -22,16 +21,18 @@ class InvitationsScreen extends HookConsumerWidget {
     final userId = ref.watch(userIdProvider);
     final packageInfoState = usePackageInfoState();
     final packageInfo = packageInfoState.packageInfo;
-    
-    final unapprovedInvitationsAsyncValue = ref.watch(unapprovedInvitationStreamProvider);
-    final approvedInvitationsAsyncValue = ref.watch(approvedInvitationStreamProvider);
+
+    final unapprovedInvitationsAsyncValue =
+        ref.watch(unapprovedInvitationStreamProvider);
+    final approvedInvitationsAsyncValue =
+        ref.watch(approvedInvitationStreamProvider);
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            '招待状',
+            'ALL',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           backgroundColor: Colors.white,
@@ -47,15 +48,13 @@ class InvitationsScreen extends HookConsumerWidget {
             unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.black),
+                borderRadius: BorderRadius.circular(30), color: Colors.black),
             tabs: const [
-              Tab(text: '未承認'),
-              Tab(text: '承認済'),
+              Tab(text: '未所持'),
+              Tab(text: '所持中'),
             ],
           ),
         ),
-
         body: userId == null
             ? const EmptyPlaceholderWidget(
                 message: '招待状を表示するにはサインインが必要です。'
@@ -104,18 +103,24 @@ class InvitationsScreen extends HookConsumerWidget {
                           message: '承認済みの招待状がありません。',
                         );
                       }
-                      return SingleChildScrollView(
-                        child: ListView.builder(
-                          itemCount: invitations.length,
-                          itemBuilder: (context, index) {
-                            final invitation = invitations[index];
-                            return ApprovedInvitationWidget(
-                              invitationId: invitation.invitationId,
-                            );
-                          },
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
+                      return GridView.builder(
+                        
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, 
+                          childAspectRatio: 0.8,
                         ),
+                        itemCount: invitations.length,
+                        itemBuilder: (context, index) {
+                          final invitation = invitations[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(
+                                10.0), 
+                            child: ApprovedInvitationWidget(
+                              invitationId: invitation.invitationId,
+                            ),
+                          );
+                        },
                       );
                     },
                     error: (_, __) => const SizedBox(),
