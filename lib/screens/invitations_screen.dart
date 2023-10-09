@@ -32,7 +32,7 @@ class InvitationsScreen extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'ALL',
+            'Cards',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           ),
           backgroundColor: Colors.white,
@@ -103,24 +103,18 @@ class InvitationsScreen extends HookConsumerWidget {
                           message: '承認済みの招待状がありません。',
                         );
                       }
-                      return GridView.builder(
-                        
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, 
-                          childAspectRatio: 0.8,
-                        ),
-                        itemCount: invitations.length,
-                        itemBuilder: (context, index) {
-                          final invitation = invitations[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(
-                                10.0), 
-                            child: ApprovedInvitationWidget(
+                      return SingleChildScrollView(
+                        child: ListView.builder(
+                          itemCount: invitations.length,
+                          itemBuilder: (context, index) {
+                            final invitation = invitations[index];
+                            return ApprovedInvitationWidget(
                               invitationId: invitation.invitationId,
-                            ),
-                          );
-                        },
+                            );
+                          },
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                        ),
                       );
                     },
                     error: (_, __) => const SizedBox(),

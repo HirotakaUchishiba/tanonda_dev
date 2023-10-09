@@ -62,61 +62,61 @@ class ApprovedInvitationWidget extends HookConsumerWidget {
                   );
                 },
                 child: Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 3,
-                          blurRadius: 3,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 194, 247, 255),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10)),
-                            image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                  invitation.storeImageUrl,
-                                ),
-                                fit: BoxFit.cover),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(10, 10),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
                           ),
-                          height: MediaQuery.of(context).size.width * 0.4,
-                          width: MediaQuery.of(context).size.width * 0.875,
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)),
-                            color: Color.fromARGB(255, 255, 255, 255),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 194, 247, 255),
+                              borderRadius: BorderRadius.circular(10
+                                  ),
+                              image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                    invitation.storeImageUrl,
+                                  ),
+                                  fit: BoxFit.cover),
+                            ),
+                            height: MediaQuery.of(context).size.width * 0.5,
+                            width: MediaQuery.of(context).size.width * 0.875,
+                            child:Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                      padding: const EdgeInsets.fromLTRB(20,0,0,25),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            
+                                            invitation.storeName,
+                                            style: const TextStyle(
+                                        
+                                              color: Colors.white,
+                                              fontSize: 30,
+                                                fontWeight: FontWeight.bold),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                              ],
+                            ),
                           ),
-                          height: MediaQuery.of(context).size.width * 0.13,
-                          width: MediaQuery.of(context).size.width * 0.875,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Text(
-                                  invitation.storeName,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                         
+                        ],
+                      ),
                     ),
                   ),
                 ),
