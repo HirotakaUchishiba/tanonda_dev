@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/screens/home_screen.dart';
+import 'package:tanonda_dev/screens/home_screen.dart';
 
 import 'features/auth/auth.dart';
 import 'screens/root_navigator.dart';
@@ -14,7 +14,7 @@ class App extends ConsumerWidget {
     final isSignedIn = ref.watch(isSignedInProvider).valueOrNull ?? false;
     return MaterialApp(
       key: UniqueKey(),
-      title: 'Dope',
+      title: 'tanonda_dev',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.brown).copyWith(
         textTheme: TextTheme(

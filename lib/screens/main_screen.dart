@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/features/bottom_tab/bottom_tab.dart';
-import 'package:ohima/screens/not_found_screen.dart';
+import 'package:tanonda_dev/features/bottom_tab/bottom_tab.dart';
+import 'package:tanonda_dev/screens/not_found_screen.dart';
 
 import '../utils/firebase_messaging.dart';
 import '../utils/logger.dart';

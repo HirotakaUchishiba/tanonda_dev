@@ -1,16 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:ohima/widgets/dialog.dart';
-
-import '../utils/api/google_map_api_client.dart';
+import 'package:tanonda_dev/widgets/dialog.dart';
 
 import '../widgets/unapproved_invitation_widget.dart';
-import 'invitation_approved_screen.dart';
 
 class UnApprovedInvitationScreen extends HookConsumerWidget {
   final String invitationId;
@@ -128,31 +123,6 @@ class UnApprovedInvitationScreen extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                      const Gap(10),
-                      // Replace your original GoogleMap widget with FutureBuilder
-                      SizedBox(
-                        height: 300,
-                        width: double.infinity,
-                        child: FutureBuilder<LatLng>(
-                          future: getLatLng(invitation.storeAddress),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            } else if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            } else {
-                              return GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                  target: snapshot.data!,
-                                  zoom: 14.0,
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                      ),
                       const Gap(20),
                       Container(
                         margin: const EdgeInsets.only(top: 20),
@@ -241,29 +211,6 @@ class UnApprovedInvitationScreen extends HookConsumerWidget {
                                       child: const Text("戻る"),
                                       onPressed: () {
                                         Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: const Text("承認する"),
-                                      onPressed: () async {
-                                        await FirebaseFirestore.instance
-                                            .collection('invitations')
-                                            .doc(
-                                                invitationId) // 更新するドキュメントのIDを指定
-                                            .update(
-                                                {'isApproved': true}) // 更新内容を指定
-                                            .catchError((error) {
-                                          // 更新に失敗した場合のエラーハンドリング
-                                          print(
-                                              "Error updating document: $error");
-                                        });
-
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const InvitationApprovedScreen()),
-                                        );
                                       },
                                     ),
                                   ],

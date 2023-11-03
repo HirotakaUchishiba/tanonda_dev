@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../utils/styles/button.dart';
 
 enum PagerButtonType {
-  previous(label: '前のページへ', iconData: FontAwesomeIcons.chevronLeft),
-  next(label: '次のページへ', iconData: FontAwesomeIcons.chevronRight);
+  previous(label: '前のページへ', iconData: Icons.arrow_back_ios),
+  next(label: '次のページへ', iconData: Icons.arrow_forward_ios);
 
   const PagerButtonType({
     required this.label,
@@ -46,7 +45,7 @@ class PagerButton extends HookConsumerWidget {
   }
 
   List<Widget> get _children => <Widget>[
-        FaIcon(buttonType.iconData, size: 14, color: Colors.black26),
+        Icon(buttonType.iconData, size: 14, color: Colors.black26),
         const Gap(8),
         Text(buttonType.label),
       ];

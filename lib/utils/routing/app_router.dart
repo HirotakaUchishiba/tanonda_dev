@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/features/auth/auth.dart';
-import 'package:ohima/screens/home_screen.dart';
-import 'package:ohima/screens/not_found_screen.dart';
+import 'package:tanonda_dev/features/auth/auth.dart';
+import 'package:tanonda_dev/screens/home_screen.dart';
+import 'package:tanonda_dev/screens/not_found_screen.dart';
 import 'package:path_to_regexp/path_to_regexp.dart';
 import 'package:tuple/tuple.dart';
 

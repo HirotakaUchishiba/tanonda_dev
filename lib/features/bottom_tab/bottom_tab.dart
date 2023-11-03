@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/screens/calendar_screen.dart';
-import 'package:ohima/screens/invitations_screen.dart';
-import 'package:ohima/screens/profile_screen.dart';
+import 'package:tanonda_dev/screens/invitations_screen.dart';
+import 'package:tanonda_dev/screens/profile_screen.dart';
 
 final bottomTabStateProvider = StateProvider<BottomTab>((_) => bottomTabs[0]);
 
 enum BottomTabEnum {
   about(label: 'invitations', location: InvitationsScreen.location),
-  calendars(label: 'calendar', location: CalendarScreen.location),
   profile(label: 'profile', location: ProfileScreen.location);
 
   const BottomTabEnum({
@@ -37,11 +34,9 @@ final bottomTabIconProvider =
     Provider.family<Widget, BottomTabEnum>((ref, bottomTabEnum) {
   switch (bottomTabEnum) {
     case BottomTabEnum.about:
-      return const FaIcon(FontAwesomeIcons.envelope);
-    case BottomTabEnum.calendars:
-      return const FaIcon(FontAwesomeIcons.list);
+      return const Icon(Icons.abc);
     case BottomTabEnum.profile:
-      return const FaIcon(FontAwesomeIcons.userPen);
+      return const Icon(Icons.abc);
   }
 });
 
@@ -53,11 +48,6 @@ final bottomTabs = <BottomTab>[
   ),
   BottomTab._(
     index: 1,
-    key: GlobalKey<NavigatorState>(),
-    bottomTabEnum: BottomTabEnum.calendars,
-  ),
-  BottomTab._(
-    index: 2,
     key: GlobalKey<NavigatorState>(),
     bottomTabEnum: BottomTabEnum.profile,
   ),

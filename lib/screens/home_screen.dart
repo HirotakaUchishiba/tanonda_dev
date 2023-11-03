@@ -1,6 +1,6 @@
 //Package import
 //Project import
-import 'package:ohima/screens/signup_screen.dart';
+import 'package:tanonda_dev/screens/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

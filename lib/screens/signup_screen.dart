@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ohima/screens/root_navigator.dart';
+import 'package:tanonda_dev/screens/root_navigator.dart';
 import 'package:path/path.dart' as Path;
-import 'package:ohima/features/user_email_provider.dart';
-import 'package:ohima/features/user_id_provider.dart';
-import 'package:ohima/features/user_password_provider.dart';
+import 'package:tanonda_dev/features/user_email_provider.dart';
+import 'package:tanonda_dev/features/user_id_provider.dart';
+import 'package:tanonda_dev/features/user_password_provider.dart';
 
 class SignupScreen extends HookConsumerWidget {
   const SignupScreen({super.key});

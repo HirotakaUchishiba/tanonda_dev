@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ohima/screens/calendar_screen.dart';
-import 'package:ohima/screens/invitations_screen.dart';
-import 'package:ohima/screens/main_screen.dart';
-import 'package:ohima/screens/not_found_screen.dart';
-import 'package:ohima/screens/profile_screen.dart';
+import 'package:tanonda_dev/screens/invitations_screen.dart';
+import 'package:tanonda_dev/screens/main_screen.dart';
+import 'package:tanonda_dev/screens/not_found_screen.dart';
+import 'package:tanonda_dev/screens/profile_screen.dart';
 
 import 'app_route.dart';
 
@@ -19,12 +18,6 @@ final appRoutes = <AppRoute>[
     name: InvitationsScreen.name,
     builder: (context, state) =>
         const InvitationsScreen(key: ValueKey(InvitationsScreen.name)),
-  ),
-  AppRoute(
-    path: CalendarScreen.path,
-    name: CalendarScreen.name,
-    builder: (context, state) =>
-        const CalendarScreen(key: ValueKey(CalendarScreen.name)),
   ),
   AppRoute(
     path: ProfileScreen.path,

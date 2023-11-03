@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/utils/loading.dart';
-import 'package:ohima/widgets/approved_invitation_widget.dart';
-import 'package:ohima/widgets/empty_placeholder.dart';
-import 'package:ohima/widgets/unapproved_invitation_widget.dart';
+import 'package:tanonda_dev/utils/loading.dart';
+import 'package:tanonda_dev/widgets/approved_invitation_widget.dart';
+import 'package:tanonda_dev/widgets/empty_placeholder.dart';
+import 'package:tanonda_dev/widgets/unapproved_invitation_widget.dart';
 
 import '../features/user_id_provider.dart';
 import '../utils/hooks/package_info_state.dart';
@@ -66,8 +65,8 @@ class InvitationsScreen extends HookConsumerWidget {
                     data: (invitations) {
                       if (invitations.isEmpty) {
                         return const EmptyPlaceholderWidget(
-                          widget: FaIcon(
-                            FontAwesomeIcons.envelopeOpenText,
+                          widget: Icon(
+                            Icons.abc,
                             color: Colors.black45,
                             size: 48,
                           ),
@@ -95,8 +94,8 @@ class InvitationsScreen extends HookConsumerWidget {
                     data: (invitations) {
                       if (invitations.isEmpty) {
                         return const EmptyPlaceholderWidget(
-                          widget: FaIcon(
-                            FontAwesomeIcons.envelopeOpenText,
+                          widget: Icon(
+                            Icons.abc,
                             color: Colors.black45,
                             size: 48,
                           ),

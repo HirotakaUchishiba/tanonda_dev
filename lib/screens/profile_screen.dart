@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/features/auth/auth.dart';
-import 'package:ohima/widgets/gradient_circular_progress_indicator.dart';
-
-import '../widgets/wallet_button.dart';
+import 'package:tanonda_dev/features/auth/auth.dart';
+import 'package:tanonda_dev/widgets/gradient_circular_progress_indicator.dart';
 
 class ProfileScreen extends HookConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -98,27 +96,6 @@ class ProfileScreen extends HookConsumerWidget {
                               backgroundImage:
                                   AssetImage('images/aster_logo.png'),
                             ),
-                            Gap(20),
-                            Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '獲得ASTER',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Text(
-                                    '2000AST',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 30),
-                                  ),
-                                  Gap(5),
-                                  WalletButton(),
-                                ])
                           ],
                         ),
                       ),

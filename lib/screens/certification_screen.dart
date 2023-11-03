@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ohima/screens/main_screen.dart';
-import 'package:ohima/screens/root_navigator.dart';
+import 'package:tanonda_dev/screens/main_screen.dart';
+import 'package:tanonda_dev/screens/root_navigator.dart';
 
 class CertificationScreen extends StatelessWidget {
   const CertificationScreen({super.key});

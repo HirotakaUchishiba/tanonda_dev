@@ -1,6 +1,6 @@
 
 
-import 'package:ohima/utils/extensions/string.dart';
+import 'package:tanonda_dev/utils/extensions/string.dart';
 
 class AppException implements Exception {
   const AppException({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ohima/features/bottom_tab/bottom_tab.dart';
+import 'package:tanonda_dev/features/bottom_tab/bottom_tab.dart';
 
 final navigationServiceProvider =
     Provider.autoDispose((ref) => NavigationService(ref));
